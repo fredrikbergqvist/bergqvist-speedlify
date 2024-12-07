@@ -1,0 +1,13 @@
+name: Scheduled build
+on:
+  schedule:
+    - cron: '0 9 */3 * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger our build webhook on Netlify
+        env:
+          TOKEN: ${{ secrets.NETLIFY_SPEED_BERGQVIST_BUILD }}
+        run: curl -X POST -d {} https://api.netlify.com/build_hooks/${TOKEN}
+
